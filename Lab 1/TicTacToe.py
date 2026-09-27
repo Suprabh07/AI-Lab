@@ -10,11 +10,10 @@ def print_board(board):
     print("\n")
 
 def check_win(board, symbol):
-    # Winning combinations: 3 Rows, 3 Columns, 2 Diagonals
     win_conditions = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], # Rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], # Columns
-        [0, 4, 8], [2, 4, 6] # Diagonals
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]
     ]
     for condition in win_conditions:
         if board[condition[0]] == board[condition[1]] == board[condition[2]] == symbol:
@@ -25,20 +24,15 @@ def check_draw(board):
     return all(space in ['X', 'O'] for space in board)
 
 def main():
-    print("==========================================")
     print(" TIC-TAC-TOE GAME (HUMAN vs CPU) ")
-    print("==========================================")
-    
-    board = [str(i + 1) for i in range(9)] # Positions indexed 1 through 9
+    board = [str(i + 1) for i in range(9)] 
     human = 'X'
     computer = 'O'
     current_turn = human
-
     print_board(board)
-
     while True:
         if current_turn == human:
-            print("--- Human's Turn (X) ---")
+            print("Human's Turn (X)")
             try:
                 move = int(input("Enter position (1-9): ")) - 1
                 if move < 0 or move > 8 or board[move] in ['X', 'O']:
@@ -49,29 +43,24 @@ def main():
                 print("Invalid input! Please enter a valid number.")
                 continue
         else:
-            print("--- Computer's Turn (O) ---")
-            # General AI logic: randomly pick an empty cell
+            print("Computer's Turn (O)")
             available_moves = [i for i in range(9) if board[i] not in ['X', 'O']]
             move = random.choice(available_moves)
             board[move] = computer
             print(f"Computer played 'O' at position {move + 1}")
-
         print_board(board)
 
-        # Check Win
         if check_win(board, current_turn):
             if current_turn == human:
-                print("🎉 You (Human) Won!")
+                print("You Won!")
             else:
-                print("🤖 Computer Won!")
+                print("Computer Won!")
             break
 
-        # Check Draw
         if check_draw(board):
-            print("🤝 Game ended in a Draw!")
+            print("Draw!!")
             break
 
-        # Switch turns
         current_turn = computer if current_turn == human else human
 
 if __name__ == "__main__":
