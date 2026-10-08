@@ -4,7 +4,6 @@ def get_board_input(prompt_name):
     """Prompts the user to enter a 3x3 board as 9 space-separated numbers."""
     print(f"\n--- Enter {prompt_name} ---")
     print("Enter 9 numbers (0 to 8) separated by spaces (0 represents the blank space):")
-    print("Example: 1 2 3 0 4 6 7 5 8")
     while True:
         try:
             raw_input = input(">> ").strip().split()
